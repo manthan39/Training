@@ -24,7 +24,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: >-
-          npx playwright test tests/logintest.spec.ts --grep=@smoke
+          npx playwright test tests/logintest.spec.ts --grep=@regression
           --config=playwright.config.ts
       - uses: actions/upload-artifact@v4
         if: '${{ !cancelled() }}'
