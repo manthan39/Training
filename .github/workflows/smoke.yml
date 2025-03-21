@@ -1,7 +1,6 @@
 name: Smoke Suite
 'on':
-  schedule:
-    - cron: '*/5 * * * *'
+
 jobs:
   build:
     timeout-minutes: 60
