@@ -21,7 +21,7 @@ test.describe("My grouped Cases", async()=>{
          await page.goto("https://magento.softwaretestingboard.com/")
          await page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]").click()
          await page.locator('id=email').fill("prutheel@getnada.com")
-         await page.locator("id=pass").fill("Test@123")
+         await page.locator("id=pass").fill("Test@1234")
      })
 
 })
