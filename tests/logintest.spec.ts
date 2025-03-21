@@ -1,0 +1,36 @@
+import {test,expect} from '@playwright/test'
+
+test.beforeAll(async()=>{
+    console.log("Before each Test")
+})
+test.describe("My grouped Cases", async()=>{
+
+    test("My first script",async ({page})=>{
+
+        //const context = await browser.newContext();
+        //const page = await context.newPage()
+        await page.goto("https://magento.softwaretestingboard.com/")
+        //await page.pause()
+        console.log(await page.title())
+        await expect(await page.title()).toBe("Home Page")
+     
+     })
+     
+     test("Verify user is able to login to application using valid credentails",{tag:'@regression'} ,async ({page})=>{
+     
+         await page.goto("https://magento.softwaretestingboard.com/")
+         await page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]").click()
+         await page.locator('id=email').fill("prutheel@getnada.com")
+         await page.locator("id=pass").fill("Test@123")
+         await page.locator("(//div[@class='actions-toolbar']//button[@id='send2'])[1]").click()
+         //let username = await page.locator("(//li[@class='greet welcome']//span[@class='logged-in'])[1]").innerText()
+        // console.log(username)
+         await expect(await page.locator("(//li[@class='greet welcome']//span[@class='logged-in'])[1]")).toHaveText("Welcome, Prutheel Baleshwaria!")
+     })
+
+})
+
+
+test.afterAll(async ()=>{
+    console.log("After Each")
+})
