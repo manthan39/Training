@@ -16,13 +16,21 @@ test.describe("My grouped Cases", async()=>{
      
      })
      
-     test("Verify user is able to login to application using valid credentails",{tag:'@regression'} ,async ({page})=>{
+     test("TC1 Verify user is able to login to application using valid credentails",{tag:'@regression'} ,async ({page})=>{
      
          await page.goto("https://magento.softwaretestingboard.com/")
          await page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]").click()
          await page.locator('id=email').fill("prutheel@getnada.com")
          await page.locator("id=pass").fill("Test@1234")
      })
+
+     test("TC2 Verify user is able to login to application using valid credentails",{tag:'@smoke'} ,async ({page})=>{
+     
+        await page.goto("https://magento.softwaretestingboard.com/")
+        await page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]").click()
+        await page.locator('id=email').fill("prutheel@getnada.com")
+        await page.locator("id=pass").fill("Test@1234")
+    })
 
 })
 
