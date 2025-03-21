@@ -1,0 +1,47 @@
+name: Smoke Suite
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch: null
+jobs:
+  build:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: >-
+          npx playwright test tests/logintest.spec.ts --grep=@smoke
+          --config=playwright.config.ts
+      - uses: actions/upload-artifact@v4
+        if: '${{ !cancelled() }}'
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Build result
+        run: |
+          echo "Application is ready for production server..."
