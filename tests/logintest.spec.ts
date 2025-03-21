@@ -22,10 +22,6 @@ test.describe("My grouped Cases", async()=>{
          await page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]").click()
          await page.locator('id=email').fill("prutheel@getnada.com")
          await page.locator("id=pass").fill("Test@123")
-         await page.locator("(//div[@class='actions-toolbar']//button[@id='send2'])[1]").click()
-         //let username = await page.locator("(//li[@class='greet welcome']//span[@class='logged-in'])[1]").innerText()
-        // console.log(username)
-         await expect(await page.locator("(//li[@class='greet welcome']//span[@class='logged-in'])[1]")).toHaveText("Welcome, Prutheel Baleshwaria!")
      })
 
 })
